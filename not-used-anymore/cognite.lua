@@ -1,0 +1,11 @@
+-- return {
+-- 	"mandos/cognite.nvim",
+-- 	config = function()
+-- 		require("cognite").setup({
+-- 			openai = {
+-- 				api_key = "",
+-- 			},
+-- 		})
+-- 	end,
+-- 	dev = true,
+-- }
