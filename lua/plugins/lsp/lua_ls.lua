@@ -1,14 +1,17 @@
 return {
-	settings = {
-		Lua = {
-			completion = { enable = true, callSnippet = "Both" },
-			diagnostics = {
-				enable = true,
-				globals = { "vim", "describe", "it", "setup", "teardown", "before_each", "after_each" },
-				disable = { "lowercase-global" },
-			},
-		},
-	},
+  settings = {
+    Lua = {
+      completion = { enable = true, callSnippet = "Both" },
+      diagnostics = {
+        enable = true,
+        globals = { "vim", "describe", "it", "setup", "teardown", "before_each", "after_each" },
+        disable = { "lowercase-global" },
+      },
+      format = {
+        enable = false,
+      },
+    },
+  },
 }
 -- return {
 --   settings = {
