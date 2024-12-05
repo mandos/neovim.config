@@ -21,29 +21,49 @@
 -- map("n", "<Down>", ":resize +1<CR>", default_options)
 --
 -- -- Autocorrect spelling from previous error
--- map("i", "<c-f>", "<c-g>u<Esc>[s1z=`]a<c-g>u", default_options)
+-- map("i", "<C-f>", "<C-g>u<Esc>[s1z=`]a<C-g>u", default_options)
 --
 -- -- Move selected line / block of text in visual mode
 -- map("x", "K", ":move '<-2<CR>gv-gv", default_options)
 -- map("x", "J", ":move '>+1<CR>gv-gv", default_options)
 
-vim.keymap.set({"n", "c"}, "xx", "<cmd>confirm quitall<cr>" )
-vim.keymap.set("n", "<tab>", "<cmd>Telescope buffers<cr>")
+local wk = require("which-key")
+wk.add({
+  { "<leader>f", group = "files" }, -- group
+  { "<leader>h", group = "help" },  -- group
+  { "<leader>l", group = "lsp" },
+  { "<leader>o", group = "open" },  -- group
+  { "<leader>t", group = "toogle" }, -- group
+  { "<leader>s", group = "search" }, -- group
+})
 
-vim.keymap.set("n", "<leader>ol", "<cmd>Lazy<cr>")
+local vk = vim.keymap
+-- vk.set({ "n", "c" }, "xx", "<cmd>confirm quitall<cr>")
+vk.set("n", "<tab>", "<cmd>Telescope buffers<cr>")
 
-vim.keymap.set("n", "<leader>hh", "<cmd>Telescope help_tags<cr>")
+vk.set("n", "<leader>ol", "<cmd>Lazy<cr>")
 
-vim.keymap.set("n", "<leader>ts", "<cmd>set list!<cr>")
+-- Toogle
+vk.set("n", "<leader>ts", "<cmd>set list!<cr>", { desc = "toggle whitespace characters" })
+
+-- Help
+vk.set("n", "<leader>hh", "<cmd>Telescope help_tags<cr>")
+vk.set("n", "<leader>hH", "<cmd>checkhealth<cr>")
+vk.set("n", "<leader>hr", "<cmd>Telescope reloader<cr>")
 
 -- Windows
 for i = 1, 6 do
-	vim.keymap.set("n", "<leader>" .. i, i .. "<c-w>w", { desc = "Move to Window " .. i })
-	vim.keymap.set("n", "<leader>w" .. i, "<cmd>" .. i .. "hide<cr>", { desc = "Close Window " .. i })
+  vk.set("n", "<leader>" .. i, i .. "<C-w>w", { desc = "Move to Window " .. i })
+  vk.set("n", "<leader>w" .. i, "<cmd>" .. i .. "hide<cr>", { desc = "Close Window " .. i })
 end
 
-vim.keymap.set("n", "<leader>ww", "<c-w><c-w>", {})
-vim.keymap.set("n", "<leader>w\\", "<cmd>vsplit<cr>", {})
-vim.keymap.set("n", "<leader>w-", "<cmd>split<cr>", {})
-vim.keymap.set("n", "<leader>w=", "<c-w>=", {})
-vim.keymap.set("n", "<leader>wd", "<cmd>:q<cr>", {})
+vk.set("n", "<leader>ww", "<C-w><C-w>", {})
+vk.set("n", "<leader>w\\", "<cmd>vsplit<cr>", {})
+vk.set("n", "<leader>w-", "<cmd>split<cr>", {})
+vk.set("n", "<leader>w=", "<C-w>=", {})
+vk.set("n", "<leader>wd", "<cmd>:q<cr>", {})
+
+-- Movement
+--
+vk.set("n", "<C-d>", "<C-d>zz", {})
+vk.set("n", "<C-u>", "<C-u>zz", {})
