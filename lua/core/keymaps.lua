@@ -27,34 +27,36 @@
 -- map("x", "K", ":move '<-2<CR>gv-gv", default_options)
 -- map("x", "J", ":move '>+1<CR>gv-gv", default_options)
 
-local wk = require("which-key")
-wk.add({
-  { "<leader>f", group = "files" }, -- group
-  { "<leader>h", group = "help" },  -- group
-  { "<leader>l", group = "lsp" },
-  { "<leader>o", group = "open" },  -- group
-  { "<leader>t", group = "toogle" }, -- group
-  { "<leader>s", group = "search" }, -- group
-})
-
 local vk = vim.keymap
 -- vk.set({ "n", "c" }, "xx", "<cmd>confirm quitall<cr>")
+vk.set({ "n" }, "<esc>", "<cmd>nohlsearch<cr>")
+
+-- Small editor tweaks
+vk.set("i", "<C-l>", "<Right>")
+
+-- Buffers
 vk.set("n", "<tab>", "<cmd>Telescope buffers<cr>")
 
-vk.set("n", "<leader>ol", "<cmd>Lazy<cr>")
+-- Code
 
--- Toogle
-vk.set("n", "<leader>ts", "<cmd>set list!<cr>", { desc = "toggle whitespace characters" })
+-- Open
+vk.set("n", "<leader>ol", "<cmd>Lazy<cr>")
+vk.set("n", "<leader>oT", "<cmd>InspectTree<cr><C-w>=")
+
+-- Toggle
+vk.set("n", "<leader>ts", "<cmd>set list!<cr>", { desc = "Toggle whitespace characters" })
+vk.set("n", "<leader>tf", "<cmd>lua require('core.utils').formatter:toggle()<cr>", { desc = "Toggle formatter" })
 
 -- Help
 vk.set("n", "<leader>hh", "<cmd>Telescope help_tags<cr>")
 vk.set("n", "<leader>hH", "<cmd>checkhealth<cr>")
 vk.set("n", "<leader>hr", "<cmd>Telescope reloader<cr>")
+vk.set("n", "<leader>ht", "<cmd>Inspect<cr>")
 
 -- Windows
 for i = 1, 6 do
-  vk.set("n", "<leader>" .. i, i .. "<C-w>w", { desc = "Move to Window " .. i })
-  vk.set("n", "<leader>w" .. i, "<cmd>" .. i .. "hide<cr>", { desc = "Close Window " .. i })
+	vk.set("n", "<leader>" .. i, i .. "<C-w>w", { desc = "Move to Window " .. i .. " (wk-ignore)" })
+	vk.set("n", "<leader>w" .. i, "<cmd>" .. i .. "hide<cr>", { desc = "Close Window " .. i .. " (wk-ignore)" })
 end
 
 vk.set("n", "<leader>ww", "<C-w><C-w>", {})
