@@ -30,6 +30,7 @@
 local vk = vim.keymap
 -- vk.set({ "n", "c" }, "xx", "<cmd>confirm quitall<cr>")
 vk.set({ "n" }, "<esc>", "<cmd>nohlsearch<cr>")
+vk.set({ "c" }, "xx", "<cmd>confirm quitall<CR>")
 
 -- Small editor tweaks
 vk.set("i", "<C-l>", "<Right>")

@@ -17,16 +17,30 @@ local function bool2str(var)
 end
 
 local formatter = setmetatable({
-	on = false,
+	value = true,
+	is_on = function(self)
+		return self["value"] == true
+	end,
+	is_off = function(self)
+		return self["value"] == false
+	end,
 	toggle = function(self)
-		if self["on"] == true then
-			self["on"] = false
+		if self["value"] == true then
+			self["value"] = false
 			vim.notify("Turn OFF automatic formatter", vim.log.levels.INFO, { title = "config" })
 		else
-			self["on"] = true
+			self["value"] = true
 			vim.notify("Turn ON automatic formatter", vim.log.levels.INFO, { title = "config" })
 		end
-		return self["on"]
+		return self["value"]
+	end,
+	on = function(self)
+		self["value"] = true
+		vim.notify("Turn ON automatic formatter", vim.log.levels.INFO, { title = "config" })
+	end,
+	off = function(self)
+		self["value"] = false
+		vim.notify("Turn OFF automatic formatter", vim.log.levels.INFO, { title = "config" })
 	end,
 }, safe_mt)
 

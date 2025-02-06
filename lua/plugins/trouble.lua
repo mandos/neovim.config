@@ -1,18 +1,36 @@
 vim.keymap.set("n", "<leader>ot", "<cmd>Trouble<cr>")
-vim.keymap.set("n", "<leader>tt", "<cmd>TroubleToggle<cr>")
+vim.keymap.set("n", "<leader>tt", "<cmd>Trouble diagnostics<cr>")
 
 return {
 	"folke/trouble.nvim",
 	dependencies = { "kyazdani42/nvim-web-devicons" },
 	lazy = true,
-	cmd = { "Trouble", "TroubleToggle" },
+	cmd = { "Trouble" },
+	keys = {
+		{
+			"<leader>tt",
+			"<cmd>Trouble diagnostics toggle filter.buf=0<cr>",
+			desc = "Buffer diagnostics",
+		},
+		{
+			"<leader>tT",
+			"<cmd>Trouble diagnostics toggle<cr>",
+			desc = "Buffer workspace diagnostics",
+		},
+	},
+
 	config = function()
 		require("trouble").setup({
+			auto_close = true,
+			auto_fold = true,         -- automatically fold a file trouble list at creation
+			auto_jump = { "lsp_definitions" }, -- for the given modes, automatically jump if there is only a single result
+			auto_open = false,        -- automatically open the list when you have diagnostics
+			auto_preview = true,      -- automatically preview the location of the diagnostic. <esc> to close preview and go back to last window
+			focus = true,
 			position = "bottom", -- position of the list can be: bottom, top, left, right
 			height = 10, -- height of the trouble list when position is top or bottom
 			width = 50, -- width of the list when position is left or right
-			icons = false, -- use devicons for filenames
-			mode = "workspace_diagnostics", -- "workspace_diagnostics", "document_diagnostics", "quickfix", "lsp_references", "loclist"
+			mode = "quickfix", -- "workspace_diagnostics", "document_diagnostics", "quickfix", "lsp_references", "loclist"
 			fold_open = "", -- icon used for open folds
 			fold_closed = "", -- icon used for closed folds
 			group = true, -- group results by file
@@ -39,11 +57,6 @@ return {
 				next = "n",           -- next item
 			},
 			indent_lines = true,      -- add an indent guide below the fold icons
-			auto_open = false,        -- automatically open the list when you have diagnostics
-			auto_close = false,       -- automatically close the list when you have no diagnostics
-			auto_preview = true,      -- automatically preview the location of the diagnostic. <esc> to close preview and go back to last window
-			auto_fold = true,         -- automatically fold a file trouble list at creation
-			auto_jump = { "lsp_definitions" }, -- for the given modes, automatically jump if there is only a single result
 			signs = {
 				-- icons / text used for a diagnostic
 				error = "",

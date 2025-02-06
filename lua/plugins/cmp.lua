@@ -26,10 +26,16 @@ return {
 			-- 			-- throttle = 80,
 			-- 			-- fetching_timeout = 1000,
 			-- 		},
-			-- 		preselect = cmp.PreselectMode.None,
+			preselect = cmp.PreselectMode.None,
 			mapping = {
 				["<C-p>"] = cmp.mapping.select_prev_item(),
-				["<C-n>"] = cmp.mapping.select_next_item(),
+				["<C-n>"] = cmp.mapping(function(fallback)
+					if cmp.visible() then
+						cmp.select_next_item()
+					else
+						cmp.complete()
+					end
+				end),
 				["<C-d>"] = cmp.mapping.scroll_docs(-4),
 				["<C-f>"] = cmp.mapping.scroll_docs(4),
 				["<C-e>"] = cmp.mapping.confirm(),
@@ -38,7 +44,7 @@ return {
 			},
 			snippet = {
 				expand = function(args)
-					require("core.utils").var_dump(args)
+					-- require("core.utils").var_dump(args)
 					require("luasnip").lsp_expand(args.body)
 				end,
 			},
@@ -48,6 +54,7 @@ return {
 			-- 			-- autocomplete = true,
 			-- 			-- completeopt = "menu,menuone,noselect",
 			-- 		},
+			--
 			-- 		confirmation = {
 			-- 			-- get_commit_characters = function()
 			-- 			--     return vim.tbl_filter(function(char)
@@ -98,16 +105,16 @@ return {
 			-- 			-- },
 			-- 		},
 			sources = {
-				{ name = "luasnip", option = { show_autosnippets = true } },
-				{ name = "nvim_lsp", keyword_length = 0, priority = 10 },
+				{ name = "luasnip",  option = { show_autosnippets = true } },
+				{ name = "nvim_lsp", keyword_length = 0,                   priority = 100 },
 				-- 			-- { name = "copilot" },
 				-- 			{ name = "nvim_lsp_signature_help" },
-				{ name = "buffer", keyword_length = 0, priority = 0 },
+				{ name = "buffer",   keyword_length = 0,                   priority = 10 },
 				-- 			{ name = "spell" },
 				{ name = "path" },
 			},
 			-- 		-- view =
-			-- 		experimental = { ghost_text = false },
+			experimental = { ghost_text = true },
 		})
 		--
 		-- 	-- Use buffer source for `/`.
