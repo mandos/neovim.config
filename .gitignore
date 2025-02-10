@@ -1,1 +1,4 @@
 .worktrees
+
+# Managed by Nix
+init.lua
