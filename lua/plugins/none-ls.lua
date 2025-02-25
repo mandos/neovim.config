@@ -12,6 +12,7 @@ return {
 				null_ls.formatting.nixfmt,
 				null_ls.formatting.shfmt,
 				null_ls.formatting.stylua,
+				null_ls.formatting.black,
 			},
 
 			-- you can reuse a shared lspconfig on_attach callback here

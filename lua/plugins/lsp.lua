@@ -24,7 +24,7 @@ return {
 		local config = {
 			capabilities = require("cmp_nvim_lsp").default_capabilities(),
 		}
-		local serwers = { "bashls", "dockerls", "helm_ls", "lua_ls", "nil_ls", "rust_analyzer", "yamlls" }
+		local serwers = { "bashls", "dockerls", "helm_ls", "lua_ls", "nil_ls", "pyright", "rust_analyzer", "yamlls" }
 		for _, server in ipairs(serwers) do
 			local file = "./lsp'/" .. server .. ".lua"
 			-- local var_dump = require("core.utils").var_dump
