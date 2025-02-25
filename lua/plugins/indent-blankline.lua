@@ -7,7 +7,7 @@ return {
 	config = function()
 		vim.keymap.set("n", "<leader>ti", "<cmd>IBLToggle<cr>")
 		require("ibl").setup({
-			enabled = false,
+			enabled = true,
 			indent = {
 				char = { "|", "¦", "┆", "┊" },
 			},

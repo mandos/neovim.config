@@ -8,7 +8,7 @@ return {
 			mappings = {
 				{
 					pattern = "lua/(.*).lua",
-					target = "tests/%1_spec.lua",
+					target = "dupas/%1_spec.lua",
 					context = "test",
 				},
 				{

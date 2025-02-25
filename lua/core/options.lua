@@ -2,7 +2,7 @@ local set = vim.opt
 
 -- Globals
 vim.g.mapleader = " "
-vim.g.maplocalleader = "\\"
+vim.g.maplocalleader = ","
 
 -- Options
 set.backup = false -- creates a backup file
